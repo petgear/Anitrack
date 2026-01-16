@@ -38,7 +38,7 @@ export default function Home() {
         <ThemeToggle />
       </Header>
 
-      <main className="flex min-h-screen items-center justify-center bg-gray-100">
+      <main className="flex min-h-screen justify-center bg-gray-100">
         <SearchResults query={filteredAnime || []}/>
       </main>
       <Footer/>
