@@ -11,3 +11,8 @@ export type Anime = {
   type: string;
   episodes: number;
 }
+
+export type Genre = {
+  mal_id: number;
+  name: string;
+}
