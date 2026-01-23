@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { Anime } from '@/src/types/Anime'
 import SearchResults from '../components/Main/SearchResults';
 import AboutAnime from '../components/AboutAnime/AboutAnime';
+import Tracker from '../components/Tracker/Tracker';
 
 const MockAnime = {
   mal_id: 1,
@@ -76,7 +77,10 @@ export default function Home() {
   
   return (
     <div className='flex flex-col min-h-screen bg-gray-100 dark:bg-black text-black dark:text-white'>
-            <AboutAnime anime={MockAnime} />
+        <Tracker /> {/*перенести в page */}
+
+        <div>-----</div>
+      <AboutAnime anime={MockAnime} /> {/*Перенести в page*/}
       <Header>
         <SearchBar
          value={searchValue}
@@ -87,6 +91,7 @@ export default function Home() {
 
       <main className="flex min-h-screen justify-center bg-gray-100">
         <SearchResults query={filteredAnime || []}/>
+
       </main>
       <Footer/>
     </div>
