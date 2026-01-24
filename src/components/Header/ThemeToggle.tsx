@@ -1,3 +1,4 @@
+"use client"
 import { Switch } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -12,7 +13,6 @@ export default function ThemeToggle() {
     document.documentElement.classList.toggle('dark', isDark);
   },[isDark]);
 
-  
   return (
     <Switch
         checked={isDark}

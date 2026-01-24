@@ -1,5 +1,7 @@
 import { Box, List, ListItem, ListItemButton } from "@mui/material";
+
 import { TRACKER_STATUSES } from "./constants/trackerStatuses";
+
 import { AnimeStatusValue } from "./types/Tracker";
 
 type TrackerSideBarProps = {
@@ -9,7 +11,7 @@ type TrackerSideBarProps = {
 
 export default function TrackerSideBar({selectedStatus, onSelect}: TrackerSideBarProps) {
   return (
-    <Box> {/*Вынести в отдельный компонент TrackerSideBar */}
+    <Box>
       <nav>
         <List>
           <ListItem>

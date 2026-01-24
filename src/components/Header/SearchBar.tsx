@@ -1,21 +1,26 @@
 "use client"
 import { Autocomplete, TextField } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-type SearchBarProps = {
-  value: string | null;
-  onChange: (value: string | null) => void;
-}
+export default function SearchBar() { // сделать тупым, всю логику в page, сделать запрос к API по query-параметру
+  const router = useRouter();
+  const [searchBarInput, setSearchBarInput] = useState('');
 
-export default function SearchBar({value, onChange}: SearchBarProps) {
 
   return (
     <Autocomplete<string, false, false, true>
-      value={value}
-      options={[]}
-      onChange={(_, newValue) => onChange(newValue)} 
+      options={[]} // позже 
       freeSolo
+      inputValue={searchBarInput}
+      onInputChange={(_, newInput) => setSearchBarInput(newInput)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' && searchBarInput.trim()) {
+          router.push(`/?q=${encodeURIComponent(searchBarInput)}`);
+        }
+      }} 
       renderInput={(params) => (
-        <TextField {...params} label="Search anime" variant="outlined" />
+        <TextField {...params} label="Искать аниме" variant="outlined" />
       )}
       sx={{ width: 350}}
     />
