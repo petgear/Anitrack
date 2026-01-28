@@ -1,24 +1,22 @@
-import { Box, List, ListItem, ListItemButton } from "@mui/material";
+'use client';
 
-import { TRACKER_STATUSES } from "./constants/trackerStatuses";
+import { Box, List, ListItem, ListItemButton } from '@mui/material';
 
-import { AnimeStatusValue } from "./types/Tracker";
+import { TRACKER_STATUSES } from './constants/trackerStatuses';
+import { AnimeStatusValue } from './types/tracker';
 
 type TrackerSideBarProps = {
   selectedStatus: 'all' | AnimeStatusValue;
   onSelect: (status: 'all' | AnimeStatusValue) => void;
-}
+};
 
-export default function TrackerSideBar({selectedStatus, onSelect}: TrackerSideBarProps) {
+export default function TrackerSideBar({ selectedStatus, onSelect }: TrackerSideBarProps) {
   return (
     <Box>
       <nav>
         <List>
           <ListItem>
-            <ListItemButton 
-              selected={selectedStatus === 'all'}
-              onClick={() => onSelect('all')}
-            >
+            <ListItemButton selected={selectedStatus === 'all'} onClick={() => onSelect('all')}>
               Все
             </ListItemButton>
           </ListItem>

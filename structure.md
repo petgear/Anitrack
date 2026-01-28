@@ -1,61 +1,58 @@
 ## Structure
 
-  ## Finder
+## Finder
 
-  Header
-   fake-auth-localstorage
-   theme-toggle
-   logo
+Header
+fake-auth-localstorage
+theme-toggle
+logo
 
-  Search
-    input 
-    find-button
-    Autocomplete
+Search
+input
+find-button
+Autocomplete
 
-  Results
-    list
-    pagination
-    Modal
-    each card:
-      title, image, score
-      button 'Add to...'
+Results
+list
+pagination
+Modal
+each card:
+title, image, score
+button 'Add to...'
 
-  Footer
-    Copyright
-    Links
+Footer
+Copyright
+Links
 
 ---
 
-  ## List
+## List
 
-  Header
-   fake-auth-localstorage
-   theme-toggle
-   logo
+Header
+fake-auth-localstorage
+theme-toggle
+logo
 
+Anime-list
+Watched
+On Hold
+Dropped
 
-  Anime-list
-    Watched
-    On Hold
-    Dropped
-  
-  Footer
-    Copyright
-    Links
-
+Footer
+Copyright
+Links
 
 ## Stack
-  MUI
-  RTK
-  RTK Query
-  Next
-  React
-  TS
-  TailwindCSS
 
-
+MUI
+RTK
+RTK Query
+Next
+React
+TS
+TailwindCSS
 
 ## todo
 
-  Иконка
-  ThemeToggle
+Иконка
+ThemeToggle

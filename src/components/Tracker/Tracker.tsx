@@ -1,19 +1,22 @@
-"use client"
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import { mockAnime } from "./mock";
+import TrackerSideBar from './TrackerSideBar';
+import TrackerAnimeList from './TrackerAnimeList';
 
-import TrackerSideBar from "./TrackerSideBar";
-import TrackerAnimeList from "./TrackerAnimeList";
-
-import { AnimeStatusValue } from "./types/Tracker";
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/src/store/store';
+import { changeStatus, TrackerStatus } from '@/src/store/trackerSlice';
 
 export default function Tracker() {
-  const [selectedStatus, setSelectedStatus] = useState<'all' | AnimeStatusValue>('all');
-  const filteredAnime = selectedStatus === 'all'
-    ? mockAnime
-    : mockAnime.filter(anime => anime.status === selectedStatus);
+  const dispatch = useDispatch<AppDispatch>();
+  const trackerList = useSelector((state: RootState) => state.tracker.list);
+
+  const [selectedStatus, setSelectedStatus] = useState<'all' | TrackerStatus>('all');
+
+  const filteredAnime =
+    selectedStatus === 'all' ? trackerList : trackerList.filter((a) => a.status === selectedStatus);
 
   return (
     <div className="flex min-h-screen">
@@ -25,9 +28,11 @@ export default function Tracker() {
       </aside>
 
       <main className="flex-1 overflow-y-auto">
-        <TrackerAnimeList filteredAnime={filteredAnime}/>
+        <TrackerAnimeList
+          filteredAnime={filteredAnime}
+          onChangeStatus={(id, status) => dispatch(changeStatus({ id, status }))}
+        />
       </main>
     </div>
   );
 }
-

@@ -1,44 +1,27 @@
-"use client"
-
-import { useEffect, useState } from 'react';
-
-import { MockAnime } from './mockHome';
+'use client';
 
 import SearchResults from '../components/Main/SearchResults';
-import AboutAnime from '../components/AboutAnime/AboutAnime';
 
-import { Anime } from '@/src/types/Anime'
+import { useAnimeSearchQuery, useTopAnimeQuery } from '../services/hooks';
+import { useSearchParams } from 'next/navigation';
 
+export default function Home() {
+  const searchParams = useSearchParams();
+  const query = searchParams.get('q') || '';
 
-export default function Home({searchParams,}: {searchParams: { q?: string};}) {
-  const query = searchParams.q;
-  const [animeList, setAnimeList] = useState<Anime[] | null>(null);
+  const topAnime = useTopAnimeQuery();
+  const searchAnime = useAnimeSearchQuery(query || '');
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (query) {
-        const res = await fetch(
-          `https://api.jikan.moe/v4/anime?q=${encodeURIComponent(query)}&limit=20` 
-        );
-        const data = await res.json()
-        setAnimeList(data.data);
-      } else {
-        const res = await fetch('https://api.jikan.moe/v4/top/anime');
-        const data = await res.json();
-        setAnimeList(data.data);
-      }
-    };
+  const { data, isLoading, isError } = query ? searchAnime : topAnime;
 
-    fetchData();
-  },[query]);
-  
+  if (isLoading) return <div>Загрузка...</div>;
+  if (isError) return <div>Ошибка загрузки</div>;
+
   return (
-    <div className='flex flex-col min-h-screen bg-gray-100 dark:bg-black text-black dark:text-white'>
-      <AboutAnime anime={MockAnime} /> {/*Перенести в page*/}
+    <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-black text-black dark:text-white">
       <main className="flex min-h-screen justify-center bg-gray-100">
-        <SearchResults query={animeList || []}/>
+        <SearchResults query={data || []} />
       </main>
-
     </div>
-  )
+  );
 }

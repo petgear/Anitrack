@@ -1,6 +1,6 @@
-"use client"
-import { Switch } from "@mui/material";
-import { useEffect, useState } from "react";
+'use client';
+import { Switch } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
@@ -11,12 +11,7 @@ export default function ThemeToggle() {
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDark);
-  },[isDark]);
+  }, [isDark]);
 
-  return (
-    <Switch
-        checked={isDark}
-        onChange={handleToggle}
-    />
-  );
+  return <Switch checked={isDark} onChange={handleToggle} />;
 }

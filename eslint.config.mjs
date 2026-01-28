@@ -1,18 +1,20 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
+import { defineConfig } from 'eslint/config';
 
-const eslintConfig = defineConfig([
-  ...nextVitals,
-  ...nextTs,
-  // Override default ignores of eslint-config-next.
-  globalIgnores([
-    // Default ignores of eslint-config-next:
-    ".next/**",
-    "out/**",
-    "build/**",
-    "next-env.d.ts",
-  ]),
-]);
-
-export default eslintConfig;
+export default defineConfig({
+  root: true,
+  parser: '@typescript-eslint/parser',
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+  plugins: ['@typescript-eslint', 'tailwindcss'],
+  extends: [
+    'next',
+    'next/core-web-vitals',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+  ],
+  rules: {
+    'tailwindcss/classnames-order': 'warn',
+    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+  },
+  ignorePatterns: ['.next/', 'out/', 'build/', 'next-env.d.ts'],
+});
