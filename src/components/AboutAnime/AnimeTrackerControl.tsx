@@ -8,7 +8,6 @@ import type { AppDispatch } from '@/src/store/store';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/src/store/store';
 
-
 type AnimeTrackerProps = {
   anime?: AboutAnimeData;
   isLoading?: boolean;
@@ -43,7 +42,20 @@ export default function AnimeTrackerControl({ anime, isLoading }: AnimeTrackerPr
     if (exists) {
       dispatch(changeStatus({ id: anime.mal_id, status: s.value }));
     } else {
-      dispatch(addAnime((anime, s.value as TrackerStatus))); // переделеать
+      dispatch(
+        addAnime({
+          ...anime,
+          status: s.value as TrackerStatus,
+          images: {
+            jpg: {
+              image_url: anime?.images?.jpg?.image_url || '/image-placeholder.svg',
+            },
+          },
+          score: anime.score ?? 0,
+          type: anime.type ?? '-',
+          episodes: anime.episodes ?? 0,
+        })
+      );
     }
     handleAddToClose();
   };
@@ -58,7 +70,7 @@ export default function AnimeTrackerControl({ anime, isLoading }: AnimeTrackerPr
 
   useEffect(() => {
     if (!anime) return;
-    const exists = trackerList.find((a) => a.mal_id === a.mal_id);
+    const exists = trackerList.find((a) => a.mal_id === anime.mal_id);
     if (exists) {
       const s = ANIME_STATUSES.find((st) => st.value === exists.status);
       if (s) setStatus(s);
@@ -68,7 +80,7 @@ export default function AnimeTrackerControl({ anime, isLoading }: AnimeTrackerPr
   }, [trackerList, anime]);
 
   return (
-    <div>
+    <div className="my-6">
       {isLoading ? (
         <Skeleton variant="rectangular" width={200} />
       ) : (

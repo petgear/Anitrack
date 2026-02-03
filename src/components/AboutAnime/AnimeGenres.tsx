@@ -22,7 +22,7 @@ export default function AnimeGenres({ anime, isLoading }: AnimeGenresProps) {
   if (!anime || !anime.genres) return null;
 
   return (
-    <div>
+    <div className="my-5">
       <Stack direction="row" spacing={1} flexWrap="wrap">
         {anime.genres?.map((genre) => (
           <Chip

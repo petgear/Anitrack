@@ -17,8 +17,7 @@ export default function AnimeHeader({ anime, isLoading }: AnimeHeaderProps) {
 
   return (
     <div className="flex gap-8">
-      {/* left */}
-      <div className="w-[220px] shrink-0 flex flex-col gap-3">
+      <div className="w-55 shrink-0 flex flex-col gap-3">
         {isLoading ? (
           <Skeleton variant="rectangular" width={200} height={320} />
         ) : (
@@ -27,7 +26,7 @@ export default function AnimeHeader({ anime, isLoading }: AnimeHeaderProps) {
             alt={anime?.title}
             loading="lazy"
             decoding="async"
-            className="w-full h-[320px] object-cover rounded"
+            className="w-full h-80 object-cover rounded"
           />
         )}
 

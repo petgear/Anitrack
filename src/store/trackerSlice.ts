@@ -9,12 +9,14 @@ export interface TrackerAnime extends Anime {
   status: TrackerStatus;
 }
 
-interface TrackerState {
+export interface TrackerState {
   list: TrackerAnime[];
 }
 
+const saved = typeof window !== 'undefined' ? localStorage.getItem('trackerList') : null;
+
 const initialState: TrackerState = {
-  list: [],
+  list: saved ? JSON.parse(saved) : [],
 };
 
 const trackerSlice = createSlice({

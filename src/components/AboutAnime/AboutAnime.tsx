@@ -16,10 +16,10 @@ export default function AboutAnime({ anime, isLoading, isError }: AboutAnimeProp
   if (!anime && !isLoading) return <p>Ошибка загрузки аниме</p>;
   return (
     <div className="max-w-5x1 mx-auto px-4 py-6">
+      <AnimeTrackerControl anime={anime} isLoading={isLoading} />
       <AnimeHeader anime={anime} isLoading={isLoading} />
       <AnimeInfo anime={anime} isLoading={isLoading} />
       <AnimeGenres anime={anime} isLoading={isLoading} />
-      <AnimeTrackerControl anime={anime} isLoading={isLoading} />
     </div>
   );
 }
